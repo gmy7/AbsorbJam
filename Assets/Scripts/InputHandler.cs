@@ -9,7 +9,7 @@ public class InputHandler : MonoBehaviour
     private ProjectileShooter shooter;
     private Player player;
 
-    private bool shieldOnCooldown;
+    private CoolDownGuard shieldCooldown = new CoolDownGuard();
     private enum InputState { Idle, Moving }
     [SerializeField] private InputState inputState;
     private void Awake()
@@ -80,12 +80,19 @@ public class InputHandler : MonoBehaviour
     }
     private void InputShield()
     {
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (shieldOnCooldown) { return; }
+            if (!shieldCooldown.actionReady) { return; }
             player.ShieldActive = true;
+            Debug.Log("Shielding!");
+            shieldCooldown.actionReady = false;
+            StartCoroutine(CoolDown(shieldCooldown, 2f));
         }
+    }
+    IEnumerator CoolDown(CoolDownGuard guard, float coolDown)
+    {
+        yield return new WaitForSeconds(coolDown);
+        guard.actionReady = true;
     }
 }
 

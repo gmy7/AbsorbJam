@@ -66,6 +66,7 @@ public class InputHandler : MonoBehaviour
             Vector3 firingVector = new Vector3(mousePos.x - playerPos.x, mousePos.y - playerPos.y);
 
             shooter.FireProjectile(null, firingVector, false);
+            player.StopCountering();
 
             player.TakingShot();
         }
@@ -79,7 +80,7 @@ public class InputHandler : MonoBehaviour
             counter.actionReady = false;
             inputReady.actionReady = false;
             StartCoroutine(CoolDown(counter, 2f));
-            StartCoroutine(CoolDown(inputReady, 0.15f));
+            StartCoroutine(CoolDown(inputReady, 0.25f));
         }
     }
     IEnumerator CoolDown(CooldownGuard guard, float coolDown)

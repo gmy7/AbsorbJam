@@ -40,13 +40,13 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         col2D = GetComponent<Collider2D>();
+        damageFlash.durationEnded = new CooldownGuard.DurationEnded(FinishInvulnerability);
     }
     private void Update()
     {
         if (!damageFlash.DurationOver)
             FlashDamaged();
-        else
-            sr.color = Color.white;
+
     }
     private void HandleShieldPlayerState(bool value)
     {
@@ -58,8 +58,6 @@ public class Player : MonoBehaviour
         else
             playerState = PlayerState.Countering;
     }
-
-
     public void TakeHit()
     {
         if (counterActive)
@@ -77,6 +75,7 @@ public class Player : MonoBehaviour
         {
             damageFlash.DurationOver = false;
             StartCoroutine(Duration(damageFlash, 2));
+            col2D.enabled = false;
         }
     }
     public void Die()
@@ -95,7 +94,6 @@ public class Player : MonoBehaviour
         //Resets bool so that after the exit time its ready to take new input
         animator.SetBool("Shooting", false);
     }
-
     private IEnumerator ShieldCollapse()
     {
         yield return new WaitForSeconds(counterTime);
@@ -126,6 +124,11 @@ public class Player : MonoBehaviour
         if (newColor.r > 1)
             rampingColor = false;
         sr.color = newColor;
+    }
+    public void FinishInvulnerability()
+    {
+        sr.color = Color.white;
+        col2D.enabled = true;
     }
     IEnumerator Duration(CooldownGuard guard, float coolDown)
     {

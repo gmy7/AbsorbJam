@@ -22,8 +22,10 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
+        ScoreHandler.Score += 20;
         animator.SetBool("Dying", true);
         golem.behaviorState = GolemBehavior.BehaviorState.Dying;
+        transform.root.GetComponent<MonsterHandler>().monsterCount--;
     }
     public void FinishDeath()
     {

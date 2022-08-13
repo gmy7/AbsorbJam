@@ -48,11 +48,6 @@ public class InputHandler : MonoBehaviour
             moveVector.x += -1;
             inputState = InputState.Moving;
         }
-        //if (Mathf.Abs(moveVector.x) + Mathf.Abs(moveVector.y) > 1)
-        //{
-        //    //Diagonal movement
-        //    moveVector = new Vector3(0.7071f * moveVector.x, 0.7071f * moveVector.y);
-        //}
         if (inputState == InputState.Moving)
         {
             if(moveVector == Vector3.zero)
@@ -75,7 +70,7 @@ public class InputHandler : MonoBehaviour
             Vector3 playerPos = transform.position;
             Vector3 firingVector = new Vector3(mousePos.x - playerPos.x, mousePos.y - playerPos.y);
 
-            shooter.FireProjectile(null, firingVector);
+            shooter.FireProjectile(null, firingVector, false);
         }
     }
     private void InputShield()
@@ -84,7 +79,6 @@ public class InputHandler : MonoBehaviour
         {
             if (!shieldCooldown.actionReady) { return; }
             player.ShieldActive = true;
-            Debug.Log("Shielding!");
             shieldCooldown.actionReady = false;
             StartCoroutine(CoolDown(shieldCooldown, 2f));
         }
@@ -98,5 +92,5 @@ public class InputHandler : MonoBehaviour
 
 public class CoolDownGuard
 {
-    public bool actionReady;
+    public bool actionReady = true;
 }

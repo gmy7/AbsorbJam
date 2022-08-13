@@ -16,12 +16,25 @@ public class Projectile : MonoBehaviour
     {
         mover.Move(FireDirection, false);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("collision");
-        if (collision.gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag("EnemyProjectile"))
         {
-            collision.gameObject.GetComponent<Player>().TakeHit();
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<Player>().TakeHit();
+                Destroy(gameObject);
+            }
         }
+        if (gameObject.CompareTag("PlayerProjectile"))
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                collision.gameObject.GetComponent<Enemy>().TakeHit();
+                Destroy(gameObject);
+            }
+        }
+
     }
 }

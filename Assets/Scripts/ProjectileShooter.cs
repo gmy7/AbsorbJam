@@ -6,7 +6,7 @@ public class ProjectileShooter : MonoBehaviour
 {
     [SerializeField] private GameObject defaultProjectile;
     [SerializeField] private Transform firePoint;
-    public void FireProjectile(GameObject _projectile, Vector3 fireVector)
+    public void FireProjectile(GameObject _projectile, Vector3 fireVector, bool isEnemy)
     {
         GameObject projectile;
         if (_projectile == null) 
@@ -15,6 +15,9 @@ public class ProjectileShooter : MonoBehaviour
             projectile = _projectile;
 
         GameObject newProjectile = Instantiate(projectile, firePoint.position, firePoint.rotation);
+        if (isEnemy)
+            newProjectile.tag = "EnemyProjectile";
+
         newProjectile.GetComponent<Projectile>().FireDirection = fireVector;
     }
 }

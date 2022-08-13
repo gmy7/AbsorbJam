@@ -18,7 +18,6 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision");
         if (gameObject.CompareTag("EnemyProjectile"))
         {
             if (collision.gameObject.CompareTag("Player"))

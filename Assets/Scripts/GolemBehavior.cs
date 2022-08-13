@@ -8,8 +8,8 @@ public class GolemBehavior : MonoBehaviour
     private ProjectileShooter shooter;
     private GameObject player;
     private Animator animator;
-    private enum BehaviorState { Walking, Shooting }
-    [SerializeField] private BehaviorState behaviorState;
+    public enum BehaviorState { Walking, Shooting, Dying }
+    public BehaviorState behaviorState;
     private void Awake()
     {
         mover = GetComponent<Mover>();

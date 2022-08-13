@@ -9,9 +9,8 @@ public class InputHandler : MonoBehaviour
     private ProjectileShooter shooter;
     private Player player;
 
-    private CoolDownGuard counter = new CoolDownGuard();
-    private enum InputState { Idle, Moving, Countering }
-    [SerializeField] private InputState inputState;
+    private CooldownGuard counter = new CooldownGuard();
+    private CooldownGuard inputReady = new CooldownGuard();
     private void Awake()
     {
         mover = GetComponent<Mover>();
@@ -20,7 +19,8 @@ public class InputHandler : MonoBehaviour
     }
     private void Update()
     {
-        inputState = InputState.Idle;
+        //player.playerState = Player.PlayerState.Idle;
+        if (!inputReady.actionReady) { return; }
         InputMovement();
         InputShoot();
         InputCounter();
@@ -31,31 +31,26 @@ public class InputHandler : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             moveVector.y += 1;
-            inputState = InputState.Moving;
         }
         if (Input.GetKey(KeyCode.S))
         {
             moveVector.y += -1;
-            inputState = InputState.Moving;
         }
         if (Input.GetKey(KeyCode.D))
         {
             moveVector.x += 1;
-            inputState = InputState.Moving;
         }
         if (Input.GetKey(KeyCode.A))
         {
             moveVector.x += -1;
-            inputState = InputState.Moving;
         }
-        if (inputState == InputState.Moving)
+
+        if(moveVector != Vector3.zero)
         {
-            if(moveVector == Vector3.zero)
-            {
-                inputState = InputState.Idle;
-                return;
-            }
+            player.playerState = Player.PlayerState.Moving;
             mover.Move(moveVector, false);
+            player.StopCountering();
+            return;
         }
     }
     private void InputShoot()
@@ -71,6 +66,8 @@ public class InputHandler : MonoBehaviour
             Vector3 firingVector = new Vector3(mousePos.x - playerPos.x, mousePos.y - playerPos.y);
 
             shooter.FireProjectile(null, firingVector, false);
+
+            player.TakingShot();
         }
     }
     private void InputCounter()
@@ -80,17 +77,15 @@ public class InputHandler : MonoBehaviour
             if (!counter.actionReady) { return; }
             player.CounterActive = true;
             counter.actionReady = false;
+            inputReady.actionReady = false;
             StartCoroutine(CoolDown(counter, 2f));
+            StartCoroutine(CoolDown(inputReady, 0.15f));
         }
     }
-    IEnumerator CoolDown(CoolDownGuard guard, float coolDown)
+    IEnumerator CoolDown(CooldownGuard guard, float coolDown)
     {
         yield return new WaitForSeconds(coolDown);
         guard.actionReady = true;
     }
 }
 
-public class CoolDownGuard
-{
-    public bool actionReady = true;
-}

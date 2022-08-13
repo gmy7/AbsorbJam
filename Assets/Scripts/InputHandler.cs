@@ -28,27 +28,39 @@ public class InputHandler : MonoBehaviour
     private void InputMovement()
     {
         Vector3 moveVector = Vector3.zero;
+        bool isTeleporting = false;
+        if (Input.GetKeyDown(KeyCode.LeftShift) && player.ammo > 0)
+        {
+            player.ammo--;
+            isTeleporting = true;
+        }
+
         if (Input.GetKey(KeyCode.W))
         {
-            moveVector.y += 1;
+                moveVector.y += 1;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            moveVector.y += -1;
+                moveVector.y += -1;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            moveVector.x += 1;
+                moveVector.x += 1;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            moveVector.x += -1;
+                moveVector.x += -1;
         }
 
         if(moveVector != Vector3.zero)
         {
             player.playerState = Player.PlayerState.Moving;
-            mover.Move(moveVector, false);
+            if (isTeleporting)
+            {
+                mover.Teleport(moveVector);
+            }
+            else
+                mover.Move(moveVector, false);
             player.StopCountering();
             return;
         }

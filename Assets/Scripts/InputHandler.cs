@@ -9,8 +9,8 @@ public class InputHandler : MonoBehaviour
     private ProjectileShooter shooter;
     private Player player;
 
-    private CoolDownGuard shieldCooldown = new CoolDownGuard();
-    private enum InputState { Idle, Moving }
+    private CoolDownGuard counter = new CoolDownGuard();
+    private enum InputState { Idle, Moving, Countering }
     [SerializeField] private InputState inputState;
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class InputHandler : MonoBehaviour
         inputState = InputState.Idle;
         InputMovement();
         InputShoot();
-        InputShield();
+        InputCounter();
     }
     private void InputMovement()
     {
@@ -73,14 +73,14 @@ public class InputHandler : MonoBehaviour
             shooter.FireProjectile(null, firingVector, false);
         }
     }
-    private void InputShield()
+    private void InputCounter()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!shieldCooldown.actionReady) { return; }
-            player.ShieldActive = true;
-            shieldCooldown.actionReady = false;
-            StartCoroutine(CoolDown(shieldCooldown, 2f));
+            if (!counter.actionReady) { return; }
+            player.CounterActive = true;
+            counter.actionReady = false;
+            StartCoroutine(CoolDown(counter, 2f));
         }
     }
     IEnumerator CoolDown(CoolDownGuard guard, float coolDown)

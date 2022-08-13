@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject shield;
 
     private bool shieldActive;
-    public bool ShieldActive
+    public bool CounterActive
     {
         get
         {
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         if (shieldActive)
         {
             ammo++;
-            ShieldActive = false;
+            CounterActive = false;
             return;
         }
         health--;

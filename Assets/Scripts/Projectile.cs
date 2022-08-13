@@ -16,4 +16,12 @@ public class Projectile : MonoBehaviour
     {
         mover.Move(FireDirection, false);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("collision");
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<Player>().TakeHit();
+        }
+    }
 }

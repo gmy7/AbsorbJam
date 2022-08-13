@@ -7,18 +7,23 @@ public class InputHandler : MonoBehaviour
 {
     private Mover mover;
     private ProjectileShooter shooter;
+    private Player player;
+
+    private bool shieldOnCooldown;
     private enum InputState { Idle, Moving }
     [SerializeField] private InputState inputState;
     private void Awake()
     {
         mover = GetComponent<Mover>();
         shooter = GetComponent<ProjectileShooter>();
+        player = GetComponent<Player>();
     }
     private void Update()
     {
         inputState = InputState.Idle;
         InputMovement();
         InputShoot();
+        InputShield();
     }
     private void InputMovement()
     {
@@ -60,6 +65,10 @@ public class InputHandler : MonoBehaviour
     }
     private void InputShoot()
     {
+        if(player.ammo <= 0)
+        {
+            return;
+        }
         if (Input.GetButtonDown("Fire1"))
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -69,4 +78,18 @@ public class InputHandler : MonoBehaviour
             shooter.FireProjectile(null, firingVector);
         }
     }
+    private void InputShield()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (shieldOnCooldown) { return; }
+            player.ShieldActive = true;
+        }
+    }
+}
+
+public class CoolDownGuard
+{
+    public bool actionReady;
 }

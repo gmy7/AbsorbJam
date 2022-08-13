@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    [SerializeField] private GameObject spriteGO;
     [SerializeField] private float moveSpeed;
-    private void Awake()
-    {
-        if(spriteGO == null) { spriteGO = gameObject; }
-    }
     public void Move(Vector3 direction, bool moverHandleRotation)
     {
         if(moverHandleRotation)
@@ -22,8 +17,8 @@ public class Mover : MonoBehaviour
     private void HandleRotation(Vector3 direction)
     {
         if (direction.x < 0)
-            spriteGO.transform.eulerAngles = new Vector3(0, 180);
+            transform.eulerAngles = new Vector3(0, 180);
         else if (direction.x > 0)
-            spriteGO.transform.eulerAngles = new Vector3(0, 0);
+            transform.eulerAngles = new Vector3(0, 0);
     }
 }

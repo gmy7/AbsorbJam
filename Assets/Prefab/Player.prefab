@@ -145,7 +145,8 @@ MonoBehaviour:
   health: 3
   counterCooldown: 2
   counterTime: 0.75
-  flashSpeed: 0.25
+  teleportCooldown: 1
+  flashSpeed: 1.25
   cooldownBar: {fileID: 650899823846442469}
   counterFill: {fileID: 2358080338222154467}
   ammoSlotsGO:
@@ -153,6 +154,7 @@ MonoBehaviour:
   - {fileID: 2227193577491512624}
   - {fileID: 2312988651855647338}
   - {fileID: 2469719921796884806}
+  ammoSlots: []
   playerState: 0
 --- !u!114 &6034807869524931790
 MonoBehaviour:
@@ -166,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8b2ace38d882b4c8c186cc8f3035ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamePaused: 0
 --- !u!114 &2284018287810501221
 MonoBehaviour:
   m_ObjectHideFlags: 0

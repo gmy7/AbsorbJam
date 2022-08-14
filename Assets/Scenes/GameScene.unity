@@ -3861,8 +3861,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8031392612544970001, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
-      propertyPath: flashSpeed
-      value: 1.25
+      propertyPath: teleportCooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8564746967494700901, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
       propertyPath: m_RootOrder

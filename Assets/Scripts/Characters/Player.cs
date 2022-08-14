@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private bool invincible;
     public float counterCooldown = 2;
     [SerializeField] private float counterTime;
+    [SerializeField] private float teleportCooldown;
     [SerializeField] private float flashSpeed = 1;
     [SerializeField] private GameObject cooldownBar;
     [SerializeField] private GameObject counterFill;
@@ -178,7 +179,6 @@ public class Player : MonoBehaviour
         animator.SetBool("Shooting", false);
         animator.SetBool("Absorbing", false);
         animator.SetBool("Blinking", true);
-        Ammo--;
     }
     public void StartAbsorbingCore(GameObject coreGO)
     {

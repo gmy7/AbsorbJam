@@ -34,12 +34,12 @@ namespace GameSystem
         {
             Vector3 moveVector = Vector3.zero;
             bool isTeleporting = false;
-            if (Input.GetKeyDown(KeyCode.LeftShift) && player.Ammo > 0)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && teleport.actionReady)
             {
-                player.StartBlink();
                 isTeleporting = true;
+                teleport.actionReady = false;
+                StartCoroutine(CoolDown(teleport, player.counterCooldown));
             }
-
             if (Input.GetKey(KeyCode.W))
             {
                 moveVector.y += 1;
@@ -56,12 +56,12 @@ namespace GameSystem
             {
                 moveVector.x += -1;
             }
-
             if (moveVector != Vector3.zero)
             {
                 player.playerState = Player.PlayerState.Moving;
                 if (isTeleporting)
                 {
+                    player.StartBlink();
                     mover.Teleport(moveVector);
                 }
                 else

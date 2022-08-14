@@ -26,7 +26,7 @@ public class Lightning : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 Player player = collision.gameObject.GetComponent<Player>();
-                player.TakeHit(true);
+                player.TakeHit(true, Crystal.CrystalType.Yellow);
                 if (player.CounterActive)
                 {
                     //animator.SetBool("Absorbing", true);

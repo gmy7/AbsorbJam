@@ -116,10 +116,11 @@ public class Player : MonoBehaviour
         else
             playerState = PlayerState.Countering;
     }
-    public void TakeHit(bool counterable)
+    public void TakeHit(bool counterable, Crystal.CrystalType projectileType)
     {
         if (counterActive && counterable)
         {
+            ammoSlots[ammo].ammoType = projectileType;
             Ammo++;
             return;
         }

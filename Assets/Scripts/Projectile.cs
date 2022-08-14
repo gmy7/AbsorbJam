@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     private Mover mover;
     private bool isMoving = true;
     private Animator animator;
+    public Crystal.CrystalType projectileType;
     private void Awake()
     {
         mover = GetComponent<Mover>();
@@ -26,7 +27,7 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 Player player = collision.gameObject.GetComponent<Player>();
-                player.TakeHit(true);
+                player.TakeHit(true, Crystal.CrystalType.Blue);
                 if (player.CounterActive)
                 {
                     animator.SetBool("Absorbing", true);

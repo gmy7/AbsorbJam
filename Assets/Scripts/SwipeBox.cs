@@ -31,7 +31,7 @@ public class SwipeBox : MonoBehaviour
         {
             PlayerInBox = true;
             if(damageBox)
-                collision.gameObject.GetComponent<Player>().TakeHit(false);
+                collision.gameObject.GetComponent<Player>().TakeHit(false, Crystal.CrystalType.Blue);
         }
     }
 }

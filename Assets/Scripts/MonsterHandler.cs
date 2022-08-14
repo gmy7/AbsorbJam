@@ -12,9 +12,10 @@ namespace GameSystem
         [SerializeField] private List<GameObject> spawns = new List<GameObject>();
         [SerializeField] private int startingSpawns = 2;
 
+        private float timeBetweenSpawns = 3;
         private int previousSpawnIndex = 0;
         public int monsterCount;
-        [SerializeField] private int monsterCap = 3;
+        [SerializeField] private int monsterCap = 2;
         private void Awake()
         {
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -37,22 +38,25 @@ namespace GameSystem
         private IEnumerator LevelIncrease()
         {
             bool firstSpawn = true;
+            StartCoroutine(Spawner());
+
             while (true)
             {
                 if (firstSpawn)
                     yield return new WaitForSeconds(15);
                 firstSpawn = false;
-                StartCoroutine(Spawner(4));
                 monsterCap++;
                 yield return new WaitForSeconds(15);
             }
         }
-        private IEnumerator Spawner(float timer)
+        private IEnumerator Spawner()
         {
             while (true)
             {
                 SpawnMonster();
-                yield return new WaitForSeconds(timer);
+                if (timeBetweenSpawns >= 0.25f)
+                    timeBetweenSpawns -= .25f;
+                yield return new WaitForSeconds(timeBetweenSpawns);
             }
         }
         private void SpawnMonster()

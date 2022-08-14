@@ -113,6 +113,10 @@ public class Player : MonoBehaviour
     }
     public void Die()
     {
+        foreach (GameObject ammoSlotGO in ammoSlotsGO)
+        {
+            ammoSlotGO.SetActive(false);
+        }
         animator.SetBool("Dying", true);
         inputHandler.inputReady.actionReady = false;
     }
@@ -143,6 +147,7 @@ public class Player : MonoBehaviour
     {
         //Starts the animation
         animator.SetBool("Shooting", true);
+        animator.SetBool("Absorbing", false);
         Ammo--;
     }
     public void StartBlink()

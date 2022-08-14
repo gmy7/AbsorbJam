@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     private Collider2D col2D;
     [SerializeField] private int health = 1;
     [SerializeField] private GameObject core;
+    [SerializeField] private GameObject coreLight;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
+        coreLight.SetActive(false);
         col2D.enabled = false;
         //This is to only give score if they are killed by the player as opposed to being killed by the end game screen
         if (health == 0)
@@ -35,7 +37,7 @@ public class Enemy : MonoBehaviour
         transform.root.GetComponent<MonsterHandler>().monsterCount--;
         int rand = Random.Range(0, 5);
         if (rand == 0)
-            Instantiate(core);
+            Instantiate(core, transform.position, transform.rotation);
     }
     public void FinishDeath()
     {

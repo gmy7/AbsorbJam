@@ -21,11 +21,12 @@ public class GolemBehavior : MonoBehaviour
     }
     private void Start()
     {
-        randomStartDelay = Random.Range(0.1f, 1f);
-        randomShootDelay = Random.Range(2f, 4f);
+        randomStartDelay = Random.Range(1.5f, 4f);
+        randomShootDelay = Random.Range(4f, 5f);
     }
     public void FinishedSpawning()
     {
+        StartWalking();
         StartCoroutine(WakeUpShootDelay());
     }
     private void Update()
@@ -70,6 +71,7 @@ public class GolemBehavior : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log("Shooting");
             StartShooting();
             yield return new WaitForSeconds(randomShootDelay);
         }

@@ -7,11 +7,12 @@ public class Projectile : MonoBehaviour
     public Vector3 FireDirection { get; set; }
     private Mover mover;
     private bool isMoving = true;
+    private Animator animator;
     private void Awake()
     {
         mover = GetComponent<Mover>();
         Destroy(gameObject, 5);
-
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -24,8 +25,8 @@ public class Projectile : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                collision.gameObject.GetComponent<Player>().TakeHit();
-                GetComponent<Animator>().enabled = true;
+                collision.gameObject.GetComponent<Player>().TakeHit(true);
+                animator.SetBool("Colliding", true);
                 isMoving = false;
 
             }
@@ -35,9 +36,14 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 collision.gameObject.GetComponent<Enemy>().TakeHit();
-                GetComponent<Animator>().enabled = true;
+                animator.SetBool("Colliding", true);
                 isMoving = false;
             }
+        }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            animator.SetBool("Colliding", true);
+            isMoving = false;
         }
 
     }

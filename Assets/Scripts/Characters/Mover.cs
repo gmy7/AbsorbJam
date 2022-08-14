@@ -36,9 +36,9 @@ public class Mover : MonoBehaviour
     }
     private void HandleRotation(Vector3 direction)
     {
-        if (direction.x < 0)
+        if (direction.x > 0)
             transform.eulerAngles = new Vector3(0, 180);
-        else if (direction.x > 0)
+        else if (direction.x < 0)
             transform.eulerAngles = new Vector3(0, 0);
     }
 }

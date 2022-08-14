@@ -9,20 +9,25 @@ namespace GameSystem
         public GameObject player;
         private GameManager gameManager;
         [SerializeField] private GameObject golem;
-        [SerializeField] private List<GameObject> spawns = new List<GameObject>();
+        [SerializeField] private List<GameObject> spawnsGO = new();
+        private List<Spawner> spawns = new();
         [SerializeField] private int startingSpawns = 2;
 
         private float timeBetweenSpawns = 3;
-        private int previousSpawnIndex = 0;
         public int monsterCount;
         [SerializeField] private int monsterCap = 2;
         private void Awake()
         {
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
             gameManager.gameEnded = new GameManager.GameEnded(GameOver);
+            foreach(GameObject spawnGO in spawnsGO)
+            {
+                spawns.Add(spawnGO.GetComponent<Spawner>());
+            }
         }
         private void Start()
         {
+            SpawnMonster();
             StartCoroutine(StartDelay());
 
         }
@@ -62,18 +67,24 @@ namespace GameSystem
         private void SpawnMonster()
         {
             if (monsterCap <= monsterCount) { return; }
-            int spawnIndex = 0;
-            while (spawnIndex == previousSpawnIndex)
-                spawnIndex = GetRandomSpawnIndex();
+            int randSpawn = Random.Range(0, spawns.Count);
 
-            previousSpawnIndex = spawnIndex;
-            Instantiate(golem, spawns[spawnIndex].transform.position, transform.rotation, transform);
-            monsterCount++;
-        }
-        private int GetRandomSpawnIndex()
-        {
-            int randSpawnIndex = Random.Range(0, spawns.Count);
-            return randSpawnIndex;
+            for (int i = 0; i < spawns.Count; i++)
+            {
+                if (!spawns[randSpawn].SpawnerOccupied)
+                {
+                    spawns[randSpawn].SpawnMonster(golem, gameObject);
+                    monsterCount++;
+                    break;
+                }
+                else
+                {
+                    randSpawn++;
+                    //Prevent index overflow
+                    if (randSpawn >= spawns.Count)
+                        randSpawn = 0;
+                }
+            }
         }
         private void GameOver()
         {

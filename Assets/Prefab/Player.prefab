@@ -117,7 +117,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 672051753, guid: e1d1ef0c02c52eb4b8df6b790244f1e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   health: 3
   counterCooldown: 2
   counterTime: 0.75
-  flashSpeed: 0.5
+  flashSpeed: 0.25
   cooldownBar: {fileID: 650899823846442469}
   counterFill: {fileID: 2358080338222154467}
   ammoSlotsGO:

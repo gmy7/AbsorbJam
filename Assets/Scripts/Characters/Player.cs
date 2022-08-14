@@ -61,6 +61,8 @@ public class Player : MonoBehaviour
 
             if (value)
             {
+                animator.SetBool("Shooting", false);
+                animator.SetBool("Absorbing", false);
                 counterFill.transform.localScale = new Vector3(0, counterFill.transform.localScale.y);
                 StartCoroutine(ShieldCollapse());
             }
@@ -107,9 +109,9 @@ public class Player : MonoBehaviour
         else
             playerState = PlayerState.Countering;
     }
-    public void TakeHit()
+    public void TakeHit(bool counterable)
     {
-        if (counterActive)
+        if (counterActive && counterable)
         {
             Ammo++;
             return;
@@ -117,8 +119,9 @@ public class Player : MonoBehaviour
         if (invincible)
             return;
         health--;
-
-        if(health <= 0)
+        //if melee hit, this will trigger
+        StopCountering();
+        if (health <= 0)
         {
             Die();
         }
@@ -129,6 +132,7 @@ public class Player : MonoBehaviour
             invincible = true;
         }
     }
+
     public void Die()
     {
         foreach (GameObject ammoSlotGO in ammoSlotsGO)

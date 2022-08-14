@@ -23,12 +23,15 @@ public class Enemy : MonoBehaviour
     {
         golem.behaviorState = GolemBehavior.BehaviorState.Spawning;
         animator.SetBool("Spawning", true);
+        col2D.enabled = false;
     }
     //Called from animator
     public void FinishSpawning()
     {
         golem.FinishedSpawning();
         animator.SetBool("Spawning", false);
+        col2D.enabled = true;
+
     }
     public void TakeHit()
     {
@@ -46,6 +49,8 @@ public class Enemy : MonoBehaviour
         if (health == 0)
             ScoreHandler.Score += 10;
         animator.SetBool("Dying", true);
+        animator.SetBool("Swiping", false);
+        animator.SetBool("Shooting", false);
         golem.behaviorState = GolemBehavior.BehaviorState.Dying;
         transform.root.GetComponent<MonsterHandler>().monsterCount--;
         int rand = Random.Range(0, 5);
@@ -59,18 +64,15 @@ public class Enemy : MonoBehaviour
     }
     public void StartSwing()
     {
-
+        animator.SetBool("Swiping", true);
     }
     public void StrikeFrame()
     {
         swipeBox.SetActive(true);
     }
-    public void StopStrikeFrame()
-    {
-        swipeBox.SetActive(false);
-    }
     public void FinishSwing()
     {
-
+        swipeBox.SetActive(false);
+        animator.SetBool("Swiping", false);
     }
 }

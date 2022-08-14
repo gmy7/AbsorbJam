@@ -71,7 +71,6 @@ public class GolemBehavior : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Shooting");
             StartShooting();
             yield return new WaitForSeconds(randomShootDelay);
         }

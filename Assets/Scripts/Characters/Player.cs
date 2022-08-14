@@ -175,6 +175,9 @@ public class Player : MonoBehaviour
     }
     public void StartBlink()
     {
+        animator.SetBool("Shielding", false);
+        animator.SetBool("Shooting", false);
+        animator.SetBool("Absorbing", false);
         animator.SetBool("Blinking", true);
         Ammo--;
     }

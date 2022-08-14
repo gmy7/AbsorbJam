@@ -29,7 +29,6 @@ public class SwipeBox : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Gotcha!");
             PlayerInBox = true;
             if(damageBox)
                 collision.gameObject.GetComponent<Player>().TakeHit(false);

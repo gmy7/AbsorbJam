@@ -20,8 +20,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float flashSpeed = 1;
     [SerializeField] private GameObject cooldownBar;
     [SerializeField] private GameObject counterFill;
-    [SerializeField] private List<GameObject> ammoSlotsGO = new List<GameObject>();
-    private List<AmmoSlot> ammoSlots = new List<AmmoSlot>();
+    [SerializeField] private List<GameObject> ammoSlotsGO = new();
+    public List<AmmoSlot> ammoSlots = new();
     public enum PlayerState { Idle, Moving, Countering }
     public PlayerState playerState;
 
@@ -132,7 +132,6 @@ public class Player : MonoBehaviour
             invincible = true;
         }
     }
-
     public void Die()
     {
         foreach (GameObject ammoSlotGO in ammoSlotsGO)

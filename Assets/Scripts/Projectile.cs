@@ -25,10 +25,17 @@ public class Projectile : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                collision.gameObject.GetComponent<Player>().TakeHit(true);
-                animator.SetBool("Colliding", true);
+                Player player = collision.gameObject.GetComponent<Player>();
+                player.TakeHit(true);
+                if (player.CounterActive)
+                {
+                    animator.SetBool("Absorbing", true);
+                }
+                else
+                {
+                    animator.SetBool("Colliding", true);
+                }
                 isMoving = false;
-
             }
         }
         if (gameObject.CompareTag("PlayerProjectile"))

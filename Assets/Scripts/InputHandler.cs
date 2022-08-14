@@ -12,6 +12,7 @@ namespace GameSystem
         public bool gamePaused;
 
         private readonly CooldownGuard counter = new();
+        private readonly CooldownGuard teleport = new();
         public readonly CooldownGuard inputReady = new();
         private void Awake()
         {

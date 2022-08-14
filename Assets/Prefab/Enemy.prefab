@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  teleportDistance: 5
 --- !u!114 &6095866928999638064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  core: {fileID: 1110103006199929551, guid: 6e2921c8d3fa5b74cb0fca613c85c98c, type: 3}
 --- !u!212 &7324431819916615969
 SpriteRenderer:
   m_ObjectHideFlags: 0

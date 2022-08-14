@@ -28,14 +28,13 @@ public class ScoreHandler : MonoBehaviour
         scoreDisplay = displayer.GetComponent<ScoreDisplayer>();
         scoreDisplay.SetScoreField(scoreField);
     }
-    public static void LoadScore()
+    public static int GetHighScore()
     {
-        Score = PlayerPrefs.GetInt("Score", Score);
-        UpdateScore();
+        return PlayerPrefs.GetInt("HighScore", 0);
     }
     public static void SaveScore()
     {
-        PlayerPrefs.SetInt("Score", Score);
+        PlayerPrefs.SetInt("HighScore", Score);
     }
     private static void UpdateScore()
     {

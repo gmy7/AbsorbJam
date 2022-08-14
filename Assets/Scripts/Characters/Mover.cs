@@ -18,8 +18,21 @@ public class Mover : MonoBehaviour
     public void Teleport(Vector3 direction)
     {
         float arcTan = Mathf.Atan(direction.y / direction.x);
-        transform.position = new Vector3(transform.position.x + Mathf.Sign(direction.x) * Mathf.Cos(arcTan) * teleportDistance,
-                                         transform.position.y + Mathf.Sign(direction.x) * Mathf.Sin(arcTan) * teleportDistance);
+        Vector3 teleportationVector = new Vector3(transform.position.x + Mathf.Sign(direction.x) * Mathf.Cos(arcTan) * teleportDistance,
+                                               transform.position.y + Mathf.Sign(direction.x) * Mathf.Sin(arcTan) * teleportDistance);
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, teleportDistance);
+        foreach(RaycastHit2D hit in hits)
+        {
+            if (hit.transform.CompareTag("Wall"))
+            {
+                transform.position = hit.point;
+                return;
+            }
+        }
+        transform.position = teleportationVector;
+
+;
     }
     private void HandleRotation(Vector3 direction)
     {

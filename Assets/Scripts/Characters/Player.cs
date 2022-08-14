@@ -1,22 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameSystem; 
 
 public class Player : MonoBehaviour
 {
     public int health = 3;
-    public int ammo;
+
     private Animator animator;
+    private InputHandler inputHandler;
     private SpriteRenderer sr;
-    private Collider2D col2D;
-    private CooldownGuard damageFlash = new CooldownGuard();
+    private readonly CooldownGuard damageFlash = new();
+    private GameManager gameManager;
     private bool rampingColor;
+    private bool invincible;
 
     [SerializeField] private float counterTime;
     [SerializeField] private float flashSpeed = 1;
+    [SerializeField] private List<GameObject> ammoSlotsGO = new List<GameObject>();
+    private List<AmmoSlot> ammoSlots = new List<AmmoSlot>();
     public enum PlayerState { Idle, Moving, Countering }
     public PlayerState playerState;
 
+    private int ammo;
+    public int Ammo 
+    {
+        get
+        {
+            return ammo;
+        }
+        set
+        {
+            if(value > 4)
+            {
+                return;
+            }
+            if(ammo < value)
+                ammoSlots[value - 1].IsFull = true;
+            else
+                ammoSlots[value].IsFull = false;
+
+            ammo = value;
+        }
+    }
     private bool counterActive;
     public bool CounterActive
     {
@@ -39,8 +65,13 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        col2D = GetComponent<Collider2D>();
+        inputHandler = GetComponent<InputHandler>();
         damageFlash.durationEnded = new CooldownGuard.DurationEnded(FinishInvulnerability);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        foreach(GameObject ammoSlotGO in ammoSlotsGO)
+        {
+            ammoSlots.Add(ammoSlotGO.GetComponent<AmmoSlot>());
+        }
     }
     private void Update()
     {
@@ -62,9 +93,11 @@ public class Player : MonoBehaviour
     {
         if (counterActive)
         {
-            ammo++;
+            Ammo++;
             return;
         }
+        if (invincible)
+            return;
         health--;
 
         if(health <= 0)
@@ -75,25 +108,62 @@ public class Player : MonoBehaviour
         {
             damageFlash.DurationOver = false;
             StartCoroutine(Duration(damageFlash, 2));
-            col2D.enabled = false;
+            invincible = true;
         }
     }
     public void Die()
     {
-
+        animator.SetBool("Dying", true);
+        inputHandler.inputReady.actionReady = false;
     }
+    #region CalledFromAnimator
+    public void FinishDeath()
+    {
+        //Called from Animator
+        sr.enabled = false;
+        gameManager.GameOver();
+    }
+    //Resets bools so that after the exit time its ready to take new input
+    public void FinishShot()
+    {
+        animator.SetBool("Shooting", false);
+    }
+    public void FinishBlink()
+    {
+        animator.SetBool("Blinking", false);
+    }
+    public void FinishAbsorb()
+    {
+        animator.SetBool("Absorbing", false);
+    }
+    #endregion
+    #region Inputs
     //Called from inputs - input handles call to Projectile Shooter. This handles animations. Its not perfect, but neither are you
-    public void TakingShot()
+    public void StartShoot()
     {
         //Starts the animation
         animator.SetBool("Shooting", true);
-        ammo--;
+        Ammo--;
     }
-    public void FinishShot()
+    public void StartBlink()
     {
-        //Resets bool so that after the exit time its ready to take new input
-        animator.SetBool("Shooting", false);
+        animator.SetBool("Blinking", true);
+        Ammo--;
     }
+    public void StartAbsorbingCore(GameObject coreGO)
+    {
+        Core core = coreGO.GetComponent<Core>();
+        if (core.isDrained) { return; }
+
+        for (int i = ammo; i < 4; i++)
+        {
+            Ammo++;
+        }
+        core.isDrained = true;
+        animator.SetBool("Absorbing", true);
+    }
+    #endregion
+
     private IEnumerator ShieldCollapse()
     {
         yield return new WaitForSeconds(counterTime);
@@ -128,8 +198,9 @@ public class Player : MonoBehaviour
     public void FinishInvulnerability()
     {
         sr.color = Color.white;
-        col2D.enabled = true;
+        invincible = false;
     }
+
     IEnumerator Duration(CooldownGuard guard, float coolDown)
     {
         yield return new WaitForSeconds(coolDown);

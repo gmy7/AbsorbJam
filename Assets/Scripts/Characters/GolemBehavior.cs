@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GameSystem;
 public class GolemBehavior : MonoBehaviour
 {
     private Mover mover;
@@ -9,7 +9,7 @@ public class GolemBehavior : MonoBehaviour
     private GameObject player;
     private Animator animator;
     private float randomWakeUpDelay;
-    public enum BehaviorState { Walking, Shooting, Dying }
+    public enum BehaviorState { Walking, Idle, Shooting, Dying }
     public BehaviorState behaviorState;
     private void Awake()
     {
@@ -20,11 +20,12 @@ public class GolemBehavior : MonoBehaviour
     }
     private void Start()
     {
-        randomWakeUpDelay = Random.Range(1.5f, 3.5f);
+        randomWakeUpDelay = Random.Range(1f, 4.5f);
         StartCoroutine(WakeUpShootDelay());
     }
     private void Update()
     {
+        if(behaviorState == BehaviorState.Idle) { return; }
         if(behaviorState == BehaviorState.Walking)
         {
             Vector3 movementVector = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);

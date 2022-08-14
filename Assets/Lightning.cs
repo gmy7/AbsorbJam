@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Lightning : MonoBehaviour
 {
-    public Vector3 FireDirection { get; set; }
-    private Mover mover;
-    private bool isMoving = true;
+    private Collider2D col2D;
     private Animator animator;
     private void Awake()
     {
-        mover = GetComponent<Mover>();
-        Destroy(gameObject, 5);
-        animator = GetComponent<Animator>();
+        col2D = GetComponent<Collider2D>();
     }
-    void Update()
+    private void Start()
     {
-        if(isMoving)
-            mover.Move(FireDirection, false);
+        StartCoroutine(LightningStrike());
+    }
+    private IEnumerator LightningStrike()
+    {
+        yield return new WaitForSeconds(2.5f);
+        col2D.enabled = true;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,13 +29,12 @@ public class Projectile : MonoBehaviour
                 player.TakeHit(true);
                 if (player.CounterActive)
                 {
-                    animator.SetBool("Absorbing", true);
+                    //animator.SetBool("Absorbing", true);
                 }
                 else
                 {
-                    animator.SetBool("Colliding", true);
+                    //animator.SetBool("Colliding", true);
                 }
-                isMoving = false;
             }
         }
         if (gameObject.CompareTag("PlayerProjectile"))
@@ -43,19 +42,17 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 collision.gameObject.GetComponent<Enemy>().TakeHit();
-                animator.SetBool("Colliding", true);
-                isMoving = false;
+                //animator.SetBool("Colliding", true);
             }
         }
         if (collision.gameObject.CompareTag("Wall"))
         {
-            animator.SetBool("Colliding", true);
-            isMoving = false;
+            //animator.SetBool("Colliding", true);
         }
     }
-    public void FinishCollisionAnimation()
+    public void FinishLightning()
     {
         Destroy(gameObject);
-
     }
 }
+

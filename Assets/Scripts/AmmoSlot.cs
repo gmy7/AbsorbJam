@@ -8,6 +8,7 @@ public class AmmoSlot : MonoBehaviour
     [SerializeField] private Sprite empty;
     [SerializeField] private Sprite full;
     private bool isFull;
+    public Crystal.CrystalType ammoType;
     public bool IsFull
     {
         get

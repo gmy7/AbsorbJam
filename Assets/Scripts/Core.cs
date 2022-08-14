@@ -14,6 +14,8 @@ public class Core : MonoBehaviour
     private Light2D coreLight;
     private SpriteRenderer sr;
     public Transform destination;
+    public Crystal.CrystalType coreType;
+
 
     private void Awake()
     {

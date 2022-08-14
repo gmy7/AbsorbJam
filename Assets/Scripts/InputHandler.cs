@@ -7,7 +7,6 @@ namespace GameSystem
     public class InputHandler : MonoBehaviour
     {
         private Mover mover;
-        private ProjectileShooter shooter;
         private Player player;
         public bool gamePaused;
 
@@ -17,7 +16,6 @@ namespace GameSystem
         private void Awake()
         {
             mover = GetComponent<Mover>();
-            shooter = GetComponent<ProjectileShooter>();
             player = GetComponent<Player>();
         }
         private void Update()
@@ -61,7 +59,7 @@ namespace GameSystem
                 player.playerState = Player.PlayerState.Moving;
                 if (isTeleporting)
                 {
-                    player.StartBlink();
+                player.StartBlink();
                     mover.Teleport(moveVector);
                 }
                 else
@@ -82,10 +80,9 @@ namespace GameSystem
                 Vector3 playerPos = transform.position;
                 Vector3 firingVector = new Vector3(mousePos.x - playerPos.x, mousePos.y - playerPos.y);
 
-                shooter.FireProjectile(null, firingVector, false);
                 player.StopCountering();
 
-                player.StartShoot();
+                player.StartShoot(firingVector);
             }
         }
         private void InputCounter()
@@ -103,15 +100,13 @@ namespace GameSystem
         private void OnTriggerStay2D(Collider2D collision)
         {
             if (!inputReady.actionReady) { return; }
-
-            if (Input.GetKey(KeyCode.Q))
+            if (collision.gameObject.CompareTag("Core"))
             {
-                if (collision.gameObject.CompareTag("Core"))
-                {
-                    player.StartAbsorbingCore(collision.gameObject);
-                    player.StopCountering();
-                }
+                ScoreHandler.Score += 5;
+                player.StartAbsorbingCore(collision.gameObject);
+                player.StopCountering();
             }
+
         }
 
 

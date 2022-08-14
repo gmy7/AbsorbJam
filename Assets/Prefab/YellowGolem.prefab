@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultProjectile: {fileID: 7214894660094016422, guid: 76dca2701912c4549909ef70e86796be, type: 3}
+  lightning: {fileID: 0}
   firePoint: {fileID: 3777016018384919334}
 --- !u!114 &2416115836843056458
 MonoBehaviour:
@@ -199,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293a8cbf65968ca4190ff10f4f1c4020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 2
   core: {fileID: 1110103006199929551, guid: 6e2921c8d3fa5b74cb0fca613c85c98c, type: 3}
   coreLight: {fileID: 4916649754114249987}
   swipeBox: {fileID: 1522731506245839177}

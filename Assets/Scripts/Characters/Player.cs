@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject counterFill;
     [SerializeField] private List<GameObject> ammoSlotsGO = new();
     public List<AmmoSlot> ammoSlots = new();
+    private ProjectileShooter shooter;
+
+    [SerializeField] private List<GameObject> healthCrystals = new();
+    [SerializeField] private Sprite brokenHealthCrystal;
     public enum PlayerState { Idle, Moving, Countering }
     public PlayerState playerState;
 
@@ -76,7 +80,9 @@ public class Player : MonoBehaviour
         inputHandler = GetComponent<InputHandler>();
         damageFlash.durationEnded = new CooldownGuard.DurationEnded(FinishInvulnerability);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        foreach(GameObject ammoSlotGO in ammoSlotsGO)
+        shooter = GetComponent<ProjectileShooter>();
+
+        foreach (GameObject ammoSlotGO in ammoSlotsGO)
         {
             ammoSlots.Add(ammoSlotGO.GetComponent<AmmoSlot>());
         }
@@ -120,6 +126,7 @@ public class Player : MonoBehaviour
         if (invincible)
             return;
         health--;
+        healthCrystals[health].GetComponent<SpriteRenderer>().sprite = brokenHealthCrystal;
         //if melee hit, this will trigger
         StopCountering();
         if (health <= 0)
@@ -166,12 +173,22 @@ public class Player : MonoBehaviour
     #endregion
     #region Inputs
     //Called from inputs - input handles call to Projectile Shooter. This handles animations. Its not perfect, but neither are you
-    public void StartShoot()
+    public void StartShoot(Vector3 firingVector)
     {
         //Starts the animation
         animator.SetBool("Shooting", true);
         animator.SetBool("Absorbing", false);
         Ammo--;
+        if (ammoSlots[ammo].ammoType == Crystal.CrystalType.Blue)
+        {
+            shooter.FireProjectile(null, firingVector, false);
+        }
+        else if (ammoSlots[ammo].ammoType == Crystal.CrystalType.Yellow)
+        {
+            Vector3 mousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+            shooter.FireLightning(mousePos, false);
+        }
+
     }
     public void StartBlink()
     {
@@ -187,12 +204,15 @@ public class Player : MonoBehaviour
 
         for (int i = ammo; i < 4; i++)
         {
+            ammoSlots[i].ammoType = core.coreType;
             Ammo++;
         }
         core.isDrained = true;
         core.destination = gameObject.transform;
         animator.SetBool("Absorbing", true);
         animator.SetBool("Shooting", false);
+        animator.SetBool("Blinking", false);
+
     }
     #endregion
 

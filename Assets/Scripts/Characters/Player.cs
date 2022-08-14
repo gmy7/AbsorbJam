@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameSystem; 
+using GameSystem;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -14,9 +15,11 @@ public class Player : MonoBehaviour
     private GameManager gameManager;
     private bool rampingColor;
     private bool invincible;
-
+    public float counterCooldown = 2;
     [SerializeField] private float counterTime;
     [SerializeField] private float flashSpeed = 1;
+    [SerializeField] private GameObject cooldownBar;
+    [SerializeField] private GameObject counterFill;
     [SerializeField] private List<GameObject> ammoSlotsGO = new List<GameObject>();
     private List<AmmoSlot> ammoSlots = new List<AmmoSlot>();
     public enum PlayerState { Idle, Moving, Countering }
@@ -55,8 +58,10 @@ public class Player : MonoBehaviour
             counterActive = value;
             HandleShieldPlayerState(value);
             animator.SetBool("Shielding", value);
+
             if (value)
             {
+                counterFill.transform.localScale = new Vector3(0, counterFill.transform.localScale.y);
                 StartCoroutine(ShieldCollapse());
             }
         }
@@ -78,7 +83,20 @@ public class Player : MonoBehaviour
         if (!damageFlash.DurationOver)
             FlashDamaged();
 
+        FillCounterCooldownBar();
     }
+
+    private void FillCounterCooldownBar()
+    {
+        if(counterFill.transform.localScale.x >= 1)
+        {
+            counterFill.transform.localScale = new Vector3(1, counterFill.transform.localScale.y);
+            return;
+        }
+        float fillIncrement = 1 / counterCooldown;
+        counterFill.transform.localScale = new Vector3(counterFill.transform.localScale.x + fillIncrement * Time.deltaTime, counterFill.transform.localScale.y);
+    }
+
     private void HandleShieldPlayerState(bool value)
     {
         if (value == false)
@@ -119,6 +137,7 @@ public class Player : MonoBehaviour
         }
         animator.SetBool("Dying", true);
         inputHandler.inputReady.actionReady = false;
+        cooldownBar.SetActive(false);
     }
     #region CalledFromAnimator
     public void FinishDeath()
@@ -165,6 +184,7 @@ public class Player : MonoBehaviour
             Ammo++;
         }
         core.isDrained = true;
+        core.destination = gameObject.transform;
         animator.SetBool("Absorbing", true);
     }
     #endregion

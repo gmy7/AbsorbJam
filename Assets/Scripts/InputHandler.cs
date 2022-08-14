@@ -93,7 +93,7 @@ namespace GameSystem
                 player.CounterActive = true;
                 counter.actionReady = false;
                 inputReady.actionReady = false;
-                StartCoroutine(CoolDown(counter, 2f));
+                StartCoroutine(CoolDown(counter, player.counterCooldown));
                 StartCoroutine(CoolDown(inputReady, 0.4f));
             }
         }

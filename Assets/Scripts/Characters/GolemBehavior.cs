@@ -8,8 +8,9 @@ public class GolemBehavior : MonoBehaviour
     private ProjectileShooter shooter;
     private GameObject player;
     private Animator animator;
-    private float randomWakeUpDelay;
-    public enum BehaviorState { Walking, Idle, Shooting, Dying }
+    private float randomStartDelay;
+    private float randomShootDelay;
+    public enum BehaviorState { Walking, Idle, Shooting, Dying, Spawning }
     public BehaviorState behaviorState;
     private void Awake()
     {
@@ -20,7 +21,11 @@ public class GolemBehavior : MonoBehaviour
     }
     private void Start()
     {
-        randomWakeUpDelay = Random.Range(1f, 4.5f);
+        randomStartDelay = Random.Range(0.1f, 1f);
+        randomShootDelay = Random.Range(2f, 4f);
+    }
+    public void FinishedSpawning()
+    {
         StartCoroutine(WakeUpShootDelay());
     }
     private void Update()
@@ -54,7 +59,7 @@ public class GolemBehavior : MonoBehaviour
     }
     private IEnumerator WakeUpShootDelay()
     {
-        yield return new WaitForSeconds(randomWakeUpDelay);
+        yield return new WaitForSeconds(randomStartDelay);
         StartCoroutine(ShootCoroutine());
     }
     private IEnumerator ShootCoroutine()
@@ -62,7 +67,7 @@ public class GolemBehavior : MonoBehaviour
         while (true)
         {
             StartShooting();
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(randomShootDelay);
         }
     }
 }

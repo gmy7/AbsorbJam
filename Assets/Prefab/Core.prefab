@@ -103,7 +103,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.23
+  m_Radius: 0.3540923
 --- !u!114 &6371977306331183017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +118,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrained: 0
   shrink: 0.5
+  coreLightGO: {fileID: 7380664681941052952}
+  flashSpeed: 1
+  destination: {fileID: 0}
 --- !u!95 &3834642887987285264
 Animator:
   serializedVersion: 4

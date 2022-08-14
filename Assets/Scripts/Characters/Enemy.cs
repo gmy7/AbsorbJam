@@ -17,6 +17,17 @@ public class Enemy : MonoBehaviour
         golem = GetComponent<GolemBehavior>();
         col2D = GetComponent<Collider2D>();
     }
+    private void Start()
+    {
+        golem.behaviorState = GolemBehavior.BehaviorState.Spawning;
+        animator.SetBool("Spawning", true);
+    }
+    //Called from animator
+    public void FinishSpawning()
+    {
+        golem.FinishedSpawning();
+        animator.SetBool("Spawning", false);
+    }
     public void TakeHit()
     {
         health--;

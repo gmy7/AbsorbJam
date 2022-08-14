@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public Vector3 FireDirection { get; set; }
     private Mover mover;
+    private bool isMoving = true;
     private void Awake()
     {
         mover = GetComponent<Mover>();
@@ -14,7 +15,8 @@ public class Projectile : MonoBehaviour
     }
     void Update()
     {
-        mover.Move(FireDirection, false);
+        if(isMoving)
+            mover.Move(FireDirection, false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,7 +25,9 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 collision.gameObject.GetComponent<Player>().TakeHit();
-                Destroy(gameObject);
+                GetComponent<Animator>().enabled = true;
+                isMoving = false;
+
             }
         }
         if (gameObject.CompareTag("PlayerProjectile"))
@@ -31,9 +35,15 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 collision.gameObject.GetComponent<Enemy>().TakeHit();
-                Destroy(gameObject);
+                GetComponent<Animator>().enabled = true;
+                isMoving = false;
             }
         }
+
+    }
+    public void FinishCollisionAnimation()
+    {
+        Destroy(gameObject);
 
     }
 }

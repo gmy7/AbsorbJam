@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 3448949531052243059}
   - component: {fileID: 3770545665059444645}
   - component: {fileID: -3532222440783537116}
+  - component: {fileID: 4330743242166277178}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: PlayerProjectile
@@ -350,3 +351,23 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!95 &4330743242166277178
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7214894660094016422}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e58bb8e1587a364aa56a6fab07ac271, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

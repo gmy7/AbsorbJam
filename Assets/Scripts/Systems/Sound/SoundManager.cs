@@ -17,21 +17,19 @@ namespace Systems
 
         public void ChangeAmbientSound()
         {
-            SoundSettings.ambientSound = ambientSlider.value;
-            ambientText.text = SoundSettings.ambientSound.ToString();
+            SoundSettings.ambientSound = ambientSlider.value / 100;
+            ambientText.text = ambientSlider.value.ToString();
         }
         public void ChangeMusicSound()
         {
-            SoundSettings.musicSound = musicSlider.value;
-            musicText.text = SoundSettings.musicSound.ToString();
+            SoundSettings.musicSound = musicSlider.value / 100;
+            musicText.text = musicSlider.value.ToString();
 
         }
         public void ChangeEffectsSound()
         {
-            SoundSettings.effectsSound = effectsSlider.value;
-            Debug.Log(SoundSettings.effectsSound);
-            effectText.text = SoundSettings.effectsSound.ToString();
-
+            SoundSettings.effectsSound = effectsSlider.value / 100;
+            effectText.text = effectsSlider.value.ToString();
         }
     }
 }

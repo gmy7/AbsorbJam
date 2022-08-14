@@ -193,6 +193,7 @@ public class Player : MonoBehaviour
         core.isDrained = true;
         core.destination = gameObject.transform;
         animator.SetBool("Absorbing", true);
+        animator.SetBool("Shooting", false);
     }
     #endregion
 

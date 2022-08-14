@@ -14,7 +14,13 @@ namespace Systems
         public TMP_Text ambientText;
         public TMP_Text musicText;
         public TMP_Text effectText;
+        [SerializeField] private GameObject musicPlayer;
+        private MusicHandler musicHandler;
 
+        public void Awake()
+        {
+            musicHandler = musicPlayer.GetComponent<MusicHandler>();
+        }
         public void ChangeAmbientSound()
         {
             SoundSettings.ambientSound = ambientSlider.value / 100;
@@ -24,7 +30,7 @@ namespace Systems
         {
             SoundSettings.musicSound = musicSlider.value / 100;
             musicText.text = musicSlider.value.ToString();
-
+            musicHandler.UpdateSound();
         }
         public void ChangeEffectsSound()
         {

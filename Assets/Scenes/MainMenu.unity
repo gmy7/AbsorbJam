@@ -190,8 +190,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 899232129}
-  m_RootOrder: 0
+  m_Father: {fileID: 776682242}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 893159362}
+  mainMenu: {fileID: 899232128}
 --- !u!1 &84004715
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +835,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b3337cc8543a484297284ead3bf2b6b, type: 3}
+--- !u!1 &367144868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7190618472392429494, guid: 2b3337cc8543a484297284ead3bf2b6b, type: 3}
+  m_PrefabInstance: {fileID: 367144867}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &474633480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,6 +1236,7 @@ GameObject:
   - component: {fileID: 776682241}
   - component: {fileID: 776682240}
   - component: {fileID: 776682239}
+  - component: {fileID: 776682243}
   m_Layer: 5
   m_Name: UI-Menus
   m_TagString: Untagged
@@ -1312,6 +1319,7 @@ RectTransform:
   m_Children:
   - {fileID: 899232129}
   - {fileID: 893159363}
+  - {fileID: 58574008}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1320,6 +1328,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &776682243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776682238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4837ec42bd0bf443a131c40b51c3868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &875936607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,7 +1485,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 58574008}
   - {fileID: 1442942047}
   - {fileID: 1579910539}
   m_Father: {fileID: 776682242}
@@ -1671,6 +1690,7 @@ MonoBehaviour:
   ambientText: {fileID: 474633482}
   musicText: {fileID: 1445131321}
   effectText: {fileID: 183243996}
+  musicPlayer: {fileID: 367144868}
 --- !u!1 &1243870848
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,7 +2353,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 899232129}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2782,7 +2802,7 @@ Transform:
   - {fileID: 682134908}
   - {fileID: 1468168618}
   m_Father: {fileID: 899232129}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1589222566
 GameObject:

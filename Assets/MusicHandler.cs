@@ -15,10 +15,8 @@ public class MusicHandler : MonoBehaviour
         src.volume = SoundSettings.musicSound;
         src.Play();
     }
-    private void Update()
+    public void UpdateSound()
     {
-        Debug.Log(SoundSettings.musicSound);
-        Debug.Log(src.volume + " vol");
         src.volume = SoundSettings.musicSound;
     }
 

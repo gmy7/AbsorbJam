@@ -9,6 +9,7 @@ namespace GameSystem
         private Mover mover;
         private ProjectileShooter shooter;
         private Player player;
+        public bool gamePaused;
 
         private readonly CooldownGuard counter = new();
         public readonly CooldownGuard inputReady = new();
@@ -22,6 +23,7 @@ namespace GameSystem
         {
             //player.playerState = Player.PlayerState.Idle;
             if (!inputReady.actionReady) { return; }
+            if (gamePaused) { return; }
             InputMovement();
             InputShoot();
             InputCounter();

@@ -10,7 +10,7 @@ public class GolemBehavior : MonoBehaviour
     private Animator animator;
     private float randomStartDelay;
     private float randomShootDelay;
-    public enum BehaviorState { Walking, Idle, Shooting, Dying, Spawning }
+    public enum BehaviorState { Walking, Idle, Shooting, Dying, Spawning, Swiping }
     public BehaviorState behaviorState;
     private void Awake()
     {
@@ -56,6 +56,10 @@ public class GolemBehavior : MonoBehaviour
         //Start animation shooting
         animator.SetBool("Shooting", true);
         behaviorState = BehaviorState.Shooting;
+    }
+    public void StartSwiping()
+    {
+        behaviorState = BehaviorState.Swiping;
     }
     private IEnumerator WakeUpShootDelay()
     {

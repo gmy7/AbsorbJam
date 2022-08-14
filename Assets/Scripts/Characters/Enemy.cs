@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int health = 1;
     [SerializeField] private GameObject core;
     [SerializeField] private GameObject coreLight;
+    [SerializeField] private GameObject swipeBox;
+    [SerializeField] private GameObject swingRangeFinder;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -55,12 +57,20 @@ public class Enemy : MonoBehaviour
         //Called from animator
         Destroy(gameObject);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void StartSwing()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.GetComponent<Player>().TakeHit();
-        }
+
+    }
+    public void StrikeFrame()
+    {
+        swipeBox.SetActive(true);
+    }
+    public void StopStrikeFrame()
+    {
+        swipeBox.SetActive(false);
+    }
+    public void FinishSwing()
+    {
+
     }
 }

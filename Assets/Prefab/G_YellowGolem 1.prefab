@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 3153838293827363492}
   - component: {fileID: -7690724371058600516}
   m_Layer: 0
-  m_Name: YellowGolem
+  m_Name: G_YellowGolem 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,9 +161,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultProjectile: {fileID: 7214894660094016422, guid: 76dca2701912c4549909ef70e86796be, type: 3}
   lightning: {fileID: 3694995306582813270, guid: 516e60eed378b564a956926393bcda00, type: 3}
+  magma: {fileID: 0}
   firePoint: {fileID: 3777016018384919334}
   projectileFire: {fileID: 8300000, guid: f61ea4abaee0042429b14ffdb5cbad62, type: 3}
-  lightningFire: {fileID: 0}
+  lightningFire: {fileID: 8300000, guid: f2791549ec8926c4599a15ffdd75e913, type: 3}
+  magmaFire: {fileID: 0}
 --- !u!114 &2416115836843056458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +213,7 @@ MonoBehaviour:
   swipeBox: {fileID: 1522731506245839177}
   swingRangeFinder: {fileID: 5215647231483749433}
   death: {fileID: 8300000, guid: f67ba1f80cf573142a0a44e223667ac9, type: 3}
+  flashSpeed: 0.5
 --- !u!212 &7324431819916615969
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -251,9 +254,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -819107137, guid: 366acc74889dfac4a85c7c800811ecc5, type: 3}
-  m_Color: {r: 0.990566, g: 0.8816816, b: 0.3037113, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

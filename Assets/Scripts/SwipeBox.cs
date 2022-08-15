@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwipeBox : MonoBehaviour
 {
+    [SerializeField] private bool magmaBox;
     [SerializeField] private bool damageBox;
     private Enemy enemy;
     private bool playerInBox;

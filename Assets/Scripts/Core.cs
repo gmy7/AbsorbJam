@@ -33,6 +33,10 @@ public class Core : MonoBehaviour
         {
             coreLight.color = Color.blue;
         }
+        if (coreType == Crystal.CrystalType.Red)
+        {
+            coreLight.color = Color.red;
+        }
     }
     private void Update()
     {

@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
         if (invincible)
             return;
         health--;
-        if(health > 0)
+        if(health >= 0)
             healthCrystals[health].GetComponent<SpriteRenderer>().sprite = brokenHealthCrystal;
         //if melee hit, this will trigger
         StopCountering();
@@ -207,7 +207,10 @@ public class Player : MonoBehaviour
             Vector3 mousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
             shooter.FireLightning(mousePos, false);
         }
-
+        else if (ammoSlots[ammo].ammoType == Crystal.CrystalType.Red)
+        {
+            shooter.FireMagma(transform.position, false);
+        }
     }
     public void StartBlink()
     {

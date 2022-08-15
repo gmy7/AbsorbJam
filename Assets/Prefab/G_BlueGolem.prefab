@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 3153838293827363492}
   - component: {fileID: 4319042162143890367}
   m_Layer: 0
-  m_Name: BlueGolem
+  m_Name: G_BlueGolem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,6 +211,7 @@ MonoBehaviour:
   swipeBox: {fileID: 1522731506245839177}
   swingRangeFinder: {fileID: 5215647231483749433}
   death: {fileID: 8300000, guid: f67ba1f80cf573142a0a44e223667ac9, type: 3}
+  flashSpeed: 4
 --- !u!212 &7324431819916615969
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Crystal : MonoBehaviour
 {
-    public enum CrystalType { Blue, Yellow }
+    public enum CrystalType { Blue, Yellow, Red }
     public CrystalType crystalType;
 
 

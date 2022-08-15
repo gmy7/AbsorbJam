@@ -36,7 +36,7 @@ public class MainMenuManager : MonoBehaviour
             }
             else if (optionsMenu.activeSelf)
             {
-                optionsMenu.SetActive(false);
+                EscapeOptionMenu();
             }
         }
         if (Input.GetKeyDown(KeyCode.F))
@@ -64,5 +64,9 @@ public class MainMenuManager : MonoBehaviour
     public void ButtonExit()
     {
         Application.Quit();
+    }
+    public void EscapeOptionMenu()
+    {
+        optionsMenu.SetActive(false);
     }
 }

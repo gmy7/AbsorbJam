@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cbc34e6fa372c434f9670b341abdb0c7
+guid: e2ac648488bf2d94bb28712f36cb2664
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LightingFloorWARNING_0
+      name: PowerCoreGREYSCALE_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 176
-        width: 96
-        height: 176
+        y: 24
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0a973ff783d89c4f89dc0855200cb5b
-      internalID: -1034805037
+      spriteID: aebb644333b56be45bb40d8555d73df2
+      internalID: -14206755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LightingFloorWARNING_1
+      name: PowerCoreGREYSCALE_1
       rect:
         serializedVersion: 2
-        x: 96
-        y: 176
-        width: 96
-        height: 176
+        x: 24
+        y: 24
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1250051297bc7ce498f1c3601b43b281
-      internalID: -426546344
+      spriteID: 6f2a0662c4f0ca94c9678013393a1076
+      internalID: 415890061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LightingFloorWARNING_2
+      name: PowerCoreGREYSCALE_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 176
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 136ebd1d2689a0041aa8676f42db3083
-      internalID: 588783534
+      spriteID: b41f563dee1b83649b7410656f2bda22
+      internalID: 86177778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LightingFloorWARNING_3
+      name: PowerCoreGREYSCALE_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 24
         y: 0
-        width: 96
-        height: 176
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9b11ba2ee9c0564189ecc7a9b994d61
-      internalID: -1904001509
+      spriteID: b4d56c6910f6d6f43bdc36f0395d6904
+      internalID: 589769618
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LightingFloorWARNING_3: -1904001509
-      LightingFloorWARNING_2: 588783534
-      LightingFloorWARNING_1: -426546344
-      LightingFloorWARNING_0: -1034805037
+      PowerCoreGREYSCALE_0: -14206755
+      PowerCoreGREYSCALE_3: 589769618
+      PowerCoreGREYSCALE_2: 86177778
+      PowerCoreGREYSCALE_1: 415890061
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

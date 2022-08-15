@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629b6385252154343ab5cd3ff186e2a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magmaBox: 0
   damageBox: 1
 --- !u!1 &1695115248604145817
 GameObject:
@@ -161,9 +162,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultProjectile: {fileID: 7214894660094016422, guid: 76dca2701912c4549909ef70e86796be, type: 3}
   lightning: {fileID: 0}
+  magma: {fileID: 0}
   firePoint: {fileID: 3777016018384919334}
   projectileFire: {fileID: 8300000, guid: f61ea4abaee0042429b14ffdb5cbad62, type: 3}
   lightningFire: {fileID: 0}
+  magmaFire: {fileID: 0}
 --- !u!114 &2416115836843056458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +214,7 @@ MonoBehaviour:
   swipeBox: {fileID: 1522731506245839177}
   swingRangeFinder: {fileID: 5215647231483749433}
   death: {fileID: 8300000, guid: f67ba1f80cf573142a0a44e223667ac9, type: 3}
-  flashSpeed: 4
+  flashSpeed: 0.5
 --- !u!212 &7324431819916615969
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -609,4 +612,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629b6385252154343ab5cd3ff186e2a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magmaBox: 0
   damageBox: 0

@@ -76,7 +76,8 @@ public class Enemy : MonoBehaviour
                 ScoreHandler.Score += 10;
             else if (golemType == Crystal.CrystalType.Yellow)
                 ScoreHandler.Score += 25;
-
+            else if (golemType == Crystal.CrystalType.Red)
+                ScoreHandler.Score += 40;
         }
         animator.SetBool("Dying", true);
         animator.SetBool("Swiping", false);

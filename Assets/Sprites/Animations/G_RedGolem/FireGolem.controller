@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 76738e5d0d2d9e84dbe9c9efa3fbbea7, type: 2}
+  m_Motion: {fileID: 7400000, guid: 552ef9ece205bc9498148849eb1b0632, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 90d0cb417eab2ca4ebeb29806b7c2692, type: 2}
+  m_Motion: {fileID: 7400000, guid: ffc36a6600ac6fc409b64ae533e2ad9c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -156,7 +156,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3d12eb5687471ff43929c717cf003fa5, type: 2}
+  m_Motion: {fileID: 7400000, guid: a9c9e214db5d45449a0b764f345d619d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -193,7 +193,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YellowGolem
+  m_Name: FireGolem
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Shooting
@@ -255,7 +255,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: fb0851ba42521134a89b41f7be623a5d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 483f15d4e9841024dada24113e9c34ba, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -10,17 +10,23 @@ public class GolemBehavior : MonoBehaviour
     private Animator animator;
     private float randomStartDelay;
     private float randomShootDelay;
+    private bool movingOutOfSpawn;
+    [SerializeField] private AudioClip spawnSound;
+    private AudioSource src;
     public enum BehaviorState { Walking, Idle, Shooting, Dying, Spawning, Swiping }
     public BehaviorState behaviorState;
+    public Crystal.CrystalType behaviourType;
     private void Awake()
     {
         mover = GetComponent<Mover>();
         shooter = GetComponent<ProjectileShooter>();
         player = transform.root.GetComponent<MonsterHandler>().player;
         animator = GetComponent<Animator>();
+        src = GetComponent<AudioSource>();
     }
     private void Start()
     {
+        src.PlayOneShot(spawnSound);
         randomStartDelay = Random.Range(1.5f, 4f);
         randomShootDelay = Random.Range(4f, 5f);
     }
@@ -32,16 +38,37 @@ public class GolemBehavior : MonoBehaviour
     private void Update()
     {
         if(behaviorState == BehaviorState.Idle) { return; }
-        if(behaviorState == BehaviorState.Walking)
+        if (movingOutOfSpawn)
         {
-            Vector3 movementVector = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-            mover.Move(movementVector, true);
+            MoveTowardsPlayer(true);
+            return;
         }
+        if (behaviorState == BehaviorState.Walking)
+        {
+            if (behaviourType == Crystal.CrystalType.Blue)
+                MoveTowardsPlayer(true);
+            if (behaviourType == Crystal.CrystalType.Yellow)
+                MoveTowardsPlayer(false);
+        }
+    }
+    private void MoveTowardsPlayer(bool towards)
+    {
+        Vector3 movementVector = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
+
+        if (towards)
+            mover.Move(movementVector, true);
+        else
+        {
+            if (Vector3.Distance(player.transform.position, transform.position) < 3f)
+                mover.Move(-movementVector, true);
+        }
+
     }
     #region AnimationEvents
     public void StartWalking()
     {
         //Called by animation event
+
         behaviorState = BehaviorState.Walking;
         animator.SetBool("Shooting", false);
     }
@@ -49,7 +76,10 @@ public class GolemBehavior : MonoBehaviour
     {
         //Called by animation event
         Vector3 firingVector = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-        shooter.FireProjectile(null, firingVector, true);
+        if (behaviourType == Crystal.CrystalType.Blue)
+            shooter.FireProjectile(null, firingVector, true);
+        if (behaviourType == Crystal.CrystalType.Yellow)
+            shooter.FireLightning(player.transform.position, true);
     }
     #endregion
     public void StartShooting()
@@ -64,6 +94,8 @@ public class GolemBehavior : MonoBehaviour
     }
     private IEnumerator WakeUpShootDelay()
     {
+        StartCoroutine(TimeToMoveOutOfSpawn());
+        movingOutOfSpawn = true;
         yield return new WaitForSeconds(randomStartDelay);
         StartCoroutine(ShootCoroutine());
     }
@@ -74,5 +106,10 @@ public class GolemBehavior : MonoBehaviour
             StartShooting();
             yield return new WaitForSeconds(randomShootDelay);
         }
+    }
+    private IEnumerator TimeToMoveOutOfSpawn()
+    {
+        yield return new WaitForSeconds(0.7f);
+        movingOutOfSpawn = false;
     }
 }

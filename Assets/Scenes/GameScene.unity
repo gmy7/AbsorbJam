@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 481497885}
-  golem: {fileID: 3519784894954629784, guid: c508e501eb6a153408094fae06bf56a2, type: 3}
+  golem: {fileID: 3519784894954629784, guid: ab64b48beda4723428edbfb1f4eb23ef, type: 3}
   spawnsGO:
   - {fileID: 837935410}
   - {fileID: 1295769232}
@@ -4223,6 +4223,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4615108920225952089, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518690008555004799, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5695238979968525634, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4230,18 +4238,6 @@ PrefabInstance:
     - target: {fileID: 5695238979968525634, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
       propertyPath: m_TagString
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8031392612544970001, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
-      propertyPath: teleportCooldown
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8031392612544970001, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
-      propertyPath: brokenHealthCrystal
-      value: 
-      objectReference: {fileID: 537884259, guid: eaf601d8d49fc8d4590b766ff077a698, type: 3}
-    - target: {fileID: 8031392612544970001, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
-      propertyPath: healthCrystals.Array.size
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8031392612544970001, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
       propertyPath: healthCrystals.Array.data[0]
@@ -4298,6 +4294,14 @@ PrefabInstance:
     - target: {fileID: 8564746967494700901, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980891177021400367, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150715427200556547, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a115f196b389c1c4c86d4035cb5b7450, type: 3}

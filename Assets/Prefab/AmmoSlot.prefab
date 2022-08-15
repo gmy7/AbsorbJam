@@ -46,7 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   empty: {fileID: 21300000, guid: e11e7821f6e58704fb51b70bb627694a, type: 3}
-  full: {fileID: 21300000, guid: 3402ef3d0ea2c6b419a029d3dbebef2c, type: 3}
+  ammoTypes:
+  - AmmoSprite: {fileID: 21300000, guid: 3402ef3d0ea2c6b419a029d3dbebef2c, type: 3}
+    AmmoType: 0
+  - AmmoSprite: {fileID: 21300000, guid: 3402ef3d0ea2c6b419a029d3dbebef2c, type: 3}
+    AmmoType: 1
+  ammoType: 0
 --- !u!212 &2602796635237138486
 SpriteRenderer:
   m_ObjectHideFlags: 0

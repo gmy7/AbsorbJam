@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  counterCooldown: 2
-  counterTime: 0.75
-  teleportCooldown: 1
+  counterCooldown: 3
+  counterTime: 1
+  teleportCooldown: 1.5
   flashSpeed: 1.25
   cooldownBar: {fileID: 650899823846442469}
   counterFill: {fileID: 2358080338222154467}
@@ -155,8 +155,11 @@ MonoBehaviour:
   - {fileID: 2312988651855647338}
   - {fileID: 2469719921796884806}
   ammoSlots: []
-  healthCrystals: []
-  brokenHealthCrystal: {fileID: 0}
+  healthCrystals:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  brokenHealthCrystal: {fileID: 537884259, guid: eaf601d8d49fc8d4590b766ff077a698, type: 3}
   playerState: 0
 --- !u!114 &6034807869524931790
 MonoBehaviour:
@@ -383,9 +386,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8256090669870854756}
     m_Modifications:
+    - target: {fileID: -5695875865941453006, guid: f204a4429fd3c90458eb4b2ff3caa584, type: 3}
+      propertyPath: ammoTypes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -5695875865941453006, guid: f204a4429fd3c90458eb4b2ff3caa584, type: 3}
+      propertyPath: ammoTypes.Array.data[1].AmmoType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 639810295310641782, guid: f204a4429fd3c90458eb4b2ff3caa584, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 639810295310641782, guid: f204a4429fd3c90458eb4b2ff3caa584, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 639810295310641782, guid: f204a4429fd3c90458eb4b2ff3caa584, type: 3}
       propertyPath: m_LocalPosition.x

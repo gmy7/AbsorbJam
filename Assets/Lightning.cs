@@ -35,6 +35,7 @@ public class Lightning : MonoBehaviour
                 {
                     //animator.SetBool("Colliding", true);
                 }
+                col2D.enabled = false;
             }
         }
         if (gameObject.CompareTag("PlayerProjectile"))
@@ -44,10 +45,12 @@ public class Lightning : MonoBehaviour
                 collision.gameObject.GetComponent<Enemy>().TakeHit();
                 //animator.SetBool("Colliding", true);
             }
+            col2D.enabled = false;
         }
         if (collision.gameObject.CompareTag("Wall"))
         {
             //animator.SetBool("Colliding", true);
+            col2D.enabled = false;
         }
     }
     public void FinishLightning()

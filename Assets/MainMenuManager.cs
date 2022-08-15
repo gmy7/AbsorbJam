@@ -42,7 +42,8 @@ public class MainMenuManager : MonoBehaviour
     public void ButtonNewGame()
     {
         SceneManager.LoadScene(1);
-        inputHandler.gamePaused = false;
+        if(inputHandler != null)
+            inputHandler.gamePaused = false;
         mainMenu.SetActive(false);
     }
     public void ButtonOptions()

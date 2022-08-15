@@ -7,6 +7,8 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField] private GameObject defaultProjectile;
     [SerializeField] private GameObject lightning;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private AudioClip projectileFire;
+    [SerializeField] private AudioClip lightningFire;
     public void FireProjectile(GameObject _projectile, Vector3 fireVector, bool isEnemy)
     {
         GameObject projectile;

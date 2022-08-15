@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] private List<GameObject> ammoSlotsGO = new();
     public List<AmmoSlot> ammoSlots = new();
     private ProjectileShooter shooter;
+    private Coroutine counterCooldownCR;
 
     [SerializeField] private List<GameObject> healthCrystals = new();
     [SerializeField] private Sprite brokenHealthCrystal;
@@ -69,7 +70,7 @@ public class Player : MonoBehaviour
                 animator.SetBool("Shooting", false);
                 animator.SetBool("Absorbing", false);
                 counterFill.transform.localScale = new Vector3(0, counterFill.transform.localScale.y);
-                StartCoroutine(ShieldCollapse());
+                counterCooldownCR = StartCoroutine(ShieldCollapse());
             }
         }
     }
@@ -127,7 +128,8 @@ public class Player : MonoBehaviour
         if (invincible)
             return;
         health--;
-        healthCrystals[health].GetComponent<SpriteRenderer>().sprite = brokenHealthCrystal;
+        if(health > 0)
+            healthCrystals[health].GetComponent<SpriteRenderer>().sprite = brokenHealthCrystal;
         //if melee hit, this will trigger
         StopCountering();
         if (health <= 0)
@@ -226,6 +228,8 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("Shielding", false);
         CounterActive = false;
+        if(counterCooldownCR != null)
+            StopCoroutine(counterCooldownCR);
     }
     private void FlashDamaged()
     {
@@ -254,7 +258,7 @@ public class Player : MonoBehaviour
         invincible = false;
     }
 
-    IEnumerator Duration(CooldownGuard guard, float coolDown)
+    private IEnumerator Duration(CooldownGuard guard, float coolDown)
     {
         yield return new WaitForSeconds(coolDown);
         guard.DurationOver = true;

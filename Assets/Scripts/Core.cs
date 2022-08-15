@@ -23,6 +23,19 @@ public class Core : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         StartCoroutine(DestroyAfterTime());
     }
+    private void Start()
+    {
+        if(coreType == Crystal.CrystalType.Yellow)
+        {
+            sr.color = Color.yellow;
+            coreLight.color = Color.yellow;
+        }
+        if(coreType == Crystal.CrystalType.Blue)
+        {
+            sr.color = Color.blue;
+            coreLight.color = Color.blue;
+        }
+    }
     private void Update()
     {
         if (isFlashing && !isDrained)

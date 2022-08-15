@@ -204,7 +204,7 @@ public class Player : MonoBehaviour
     {
         Core core = coreGO.GetComponent<Core>();
         if (core.isDrained) { return; }
-
+        ScoreHandler.Score += 5;
         for (int i = ammo; i < 4; i++)
         {
             ammoSlots[i].ammoType = core.coreType;

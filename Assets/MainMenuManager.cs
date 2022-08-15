@@ -8,6 +8,7 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject nameMenu;
     private InputHandler inputHandler;
 
     private void Update()
@@ -38,13 +39,23 @@ public class MainMenuManager : MonoBehaviour
                 optionsMenu.SetActive(false);
             }
         }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            PlayerPrefs.SetString("PlayerName", "");
+        }
     }
     public void ButtonNewGame()
     {
+        mainMenu.SetActive(false);
+        if (PlayerPrefs.GetString("PlayerName") == "")
+        {
+            nameMenu.SetActive(true);
+            return;
+        }
+
         SceneManager.LoadScene(1);
         if(inputHandler != null)
             inputHandler.gamePaused = false;
-        mainMenu.SetActive(false);
     }
     public void ButtonOptions()
     {

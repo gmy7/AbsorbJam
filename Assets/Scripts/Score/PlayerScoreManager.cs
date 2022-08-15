@@ -5,6 +5,7 @@ using LootLocker.Requests;
 
 public class PlayerScoreManager : MonoBehaviour
 {
+    public static bool SDKConnected;
     private void Start()
     {
         StartCoroutine(LoginRoutine());
@@ -12,21 +13,20 @@ public class PlayerScoreManager : MonoBehaviour
 
     private IEnumerator LoginRoutine()
     {
-        bool done = false;
         LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (response.success)
             {
                 Debug.Log("Player was logged in");
                 PlayerPrefs.SetString("PlayerID", response.player_id.ToString());
-                done = true;
+                SDKConnected = true;
             }
             else
             {
                 Debug.Log("Could not start session");
-                done = true;
+                SDKConnected = true;
             }
         });
-        yield return new WaitWhile(() => done == false);
+        yield return new WaitWhile(() => SDKConnected == false);
     }
 }

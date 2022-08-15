@@ -63,7 +63,7 @@ namespace GameSystem
                     mover.Teleport(moveVector);
                 }
                 else
-                    mover.Move(moveVector, false, false);
+                    mover.Move(moveVector, false, true);
                 player.StopCountering();
                 return;
             }
@@ -102,7 +102,6 @@ namespace GameSystem
             if (!inputReady.actionReady) { return; }
             if (collision.gameObject.CompareTag("Core"))
             {
-                ScoreHandler.Score += 5;
                 player.StartAbsorbingCore(collision.gameObject);
                 player.StopCountering();
             }

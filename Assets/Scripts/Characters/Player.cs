@@ -128,7 +128,8 @@ public class Player : MonoBehaviour
         if (invincible)
             return;
         health--;
-        healthCrystals[health].GetComponent<SpriteRenderer>().sprite = brokenHealthCrystal;
+        if(health > 0)
+            healthCrystals[health].GetComponent<SpriteRenderer>().sprite = brokenHealthCrystal;
         //if melee hit, this will trigger
         StopCountering();
         if (health <= 0)

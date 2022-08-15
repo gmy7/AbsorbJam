@@ -11,6 +11,8 @@ public class GolemBehavior : MonoBehaviour
     private float randomStartDelay;
     private float randomShootDelay;
     private bool movingOutOfSpawn;
+    [SerializeField] private AudioClip spawnSound;
+    private AudioSource src;
     public enum BehaviorState { Walking, Idle, Shooting, Dying, Spawning, Swiping }
     public BehaviorState behaviorState;
     public Crystal.CrystalType behaviourType;
@@ -20,9 +22,11 @@ public class GolemBehavior : MonoBehaviour
         shooter = GetComponent<ProjectileShooter>();
         player = transform.root.GetComponent<MonsterHandler>().player;
         animator = GetComponent<Animator>();
+        src = GetComponent<AudioSource>();
     }
     private void Start()
     {
+        src.PlayOneShot(spawnSound);
         randomStartDelay = Random.Range(1.5f, 4f);
         randomShootDelay = Random.Range(4f, 5f);
     }
@@ -55,7 +59,7 @@ public class GolemBehavior : MonoBehaviour
             mover.Move(movementVector, true);
         else
         {
-            if (Vector3.Distance(player.transform.position, transform.position) < 8f)
+            if (Vector3.Distance(player.transform.position, transform.position) < 3f)
                 mover.Move(-movementVector, true);
         }
 
@@ -105,7 +109,7 @@ public class GolemBehavior : MonoBehaviour
     }
     private IEnumerator TimeToMoveOutOfSpawn()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0.7f);
         movingOutOfSpawn = false;
     }
 }

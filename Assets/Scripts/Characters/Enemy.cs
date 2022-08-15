@@ -13,11 +13,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject coreLight;
     [SerializeField] private GameObject swipeBox;
     [SerializeField] private GameObject swingRangeFinder;
+    [SerializeField] private AudioClip death;
+    private AudioSource src;
     private void Awake()
     {
         animator = GetComponent<Animator>();
         golem = GetComponent<GolemBehavior>();
         col2D = GetComponent<Collider2D>();
+        src = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -59,6 +62,7 @@ public class Enemy : MonoBehaviour
             GameObject droppedCore = Instantiate(core, transform.position, transform.rotation);
             droppedCore.GetComponent<Core>().coreType = golem.behaviourType;
         }
+        src.PlayOneShot(death, SoundSettings.effectsSound);
     }
     public void FinishDeath()
     {

@@ -16,11 +16,13 @@ public class Player : MonoBehaviour
     private bool rampingColor;
     [SerializeField] private bool invincible;
     public float counterCooldown = 2;
+    public float teleportCooldown = 1;
+
     [SerializeField] private float counterTime;
-    [SerializeField] private float teleportCooldown;
     [SerializeField] private float flashSpeed = 1;
     [SerializeField] private GameObject cooldownBar;
-    [SerializeField] private GameObject counterFill;
+    [SerializeField] private GameObject teleportFill;
+    [SerializeField] private List<GameObject> counterFills = new();
     [SerializeField] private List<GameObject> ammoSlotsGO = new();
     public List<AmmoSlot> ammoSlots = new();
     private ProjectileShooter shooter;
@@ -69,7 +71,10 @@ public class Player : MonoBehaviour
             {
                 animator.SetBool("Shooting", false);
                 animator.SetBool("Absorbing", false);
-                counterFill.transform.localScale = new Vector3(0, counterFill.transform.localScale.y);
+                foreach(GameObject counterFill in counterFills)
+                {
+                    counterFill.transform.localScale = new Vector3(0, counterFill.transform.localScale.y);
+                }
                 counterCooldownCR = StartCoroutine(ShieldCollapse());
             }
         }
@@ -93,18 +98,28 @@ public class Player : MonoBehaviour
         if (!damageFlash.DurationOver)
             FlashDamaged();
 
-        FillCounterCooldownBar();
+        FillCooldownBars();
     }
 
-    private void FillCounterCooldownBar()
+    private void FillCooldownBars()
     {
-        if(counterFill.transform.localScale.x >= 1)
+        foreach (GameObject counterFill in counterFills)
         {
-            counterFill.transform.localScale = new Vector3(1, counterFill.transform.localScale.y);
+            if (counterFill.transform.localScale.x >= 1)
+            {
+                counterFill.transform.localScale = new Vector3(1, counterFill.transform.localScale.y);
+                continue;
+            }
+            float fillIncrement = 1 / counterCooldown;
+            counterFill.transform.localScale = new Vector3(counterFill.transform.localScale.x + fillIncrement * Time.deltaTime, counterFill.transform.localScale.y);
+        }
+        if (teleportFill.transform.localScale.x >= 1)
+        {
+            teleportFill.transform.localScale = new Vector3(1, teleportFill.transform.localScale.y);
             return;
         }
-        float fillIncrement = 1 / counterCooldown;
-        counterFill.transform.localScale = new Vector3(counterFill.transform.localScale.x + fillIncrement * Time.deltaTime, counterFill.transform.localScale.y);
+        float increment = 1 / teleportCooldown;
+        teleportFill.transform.localScale = new Vector3(teleportFill.transform.localScale.x + increment * Time.deltaTime, teleportFill.transform.localScale.y);
     }
 
     private void HandleShieldPlayerState(bool value)
@@ -121,6 +136,7 @@ public class Player : MonoBehaviour
     {
         if (counterActive && counterable)
         {
+            if(ammo > 3) { return; }
             ammoSlots[ammo].ammoType = projectileType;
             Ammo++;
             return;
@@ -199,6 +215,8 @@ public class Player : MonoBehaviour
         animator.SetBool("Shooting", false);
         animator.SetBool("Absorbing", false);
         animator.SetBool("Blinking", true);
+
+        teleportFill.transform.localScale = new Vector3(0, teleportFill.transform.localScale.y);
     }
     public void StartAbsorbingCore(GameObject coreGO)
     {

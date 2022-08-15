@@ -36,7 +36,7 @@ namespace GameSystem
             {
                 isTeleporting = true;
                 teleport.actionReady = false;
-                StartCoroutine(CoolDown(teleport, player.counterCooldown));
+                StartCoroutine(CoolDown(teleport, player.teleportCooldown));
             }
             if (Input.GetKey(KeyCode.W))
             {

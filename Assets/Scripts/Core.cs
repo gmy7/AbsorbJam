@@ -27,12 +27,10 @@ public class Core : MonoBehaviour
     {
         if(coreType == Crystal.CrystalType.Yellow)
         {
-            sr.color = Color.yellow;
             coreLight.color = Color.yellow;
         }
         if(coreType == Crystal.CrystalType.Blue)
         {
-            sr.color = Color.blue;
             coreLight.color = Color.blue;
         }
     }

@@ -97,7 +97,7 @@ public class GolemBehavior : MonoBehaviour
         if (behaviourType == Crystal.CrystalType.Blue)
             shooter.FireProjectile(null, firingVector, true);
         if (behaviourType == Crystal.CrystalType.Yellow)
-            shooter.FireLightning(player.transform.position, true);
+            shooter.FireLightning(new Vector3(player.transform.position.x + Random.Range(-.33f, 0.33f), player.transform.position.y + Random.Range(-.33f, 0.33f)), true);
     }
     #endregion
     public void StartShooting()

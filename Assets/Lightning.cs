@@ -6,9 +6,11 @@ public class Lightning : MonoBehaviour
 {
     private Collider2D col2D;
     private Animator animator;
+    [SerializeField] private GameObject lightningBolt;
     private void Awake()
     {
         col2D = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -16,7 +18,9 @@ public class Lightning : MonoBehaviour
     }
     private IEnumerator LightningStrike()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(.75f);
+        animator.SetBool("Zapping", true);
+        lightningBolt.SetActive(true);
         col2D.enabled = true;
     }
     private void OnTriggerEnter2D(Collider2D collision)

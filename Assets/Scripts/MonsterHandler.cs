@@ -8,11 +8,12 @@ namespace GameSystem
     {
         public GameObject player;
         private GameManager gameManager;
+        [SerializeField] private List<GameObject> golems = new();
         [SerializeField] private GameObject golem;
         [SerializeField] private List<GameObject> spawnsGO = new();
         private List<Spawner> spawns = new();
         [SerializeField] private int startingSpawns = 2;
-
+        private int level;
         private float timeBetweenSpawns = 3;
         public int monsterCount;
         [SerializeField] private int monsterCap = 2;
@@ -27,7 +28,6 @@ namespace GameSystem
         }
         private void Start()
         {
-            SpawnMonster();
             StartCoroutine(StartDelay());
         }
         private IEnumerator StartDelay()
@@ -50,6 +50,7 @@ namespace GameSystem
                     yield return new WaitForSeconds(15);
                 firstSpawn = false;
                 monsterCap++;
+                level++;
                 yield return new WaitForSeconds(15);
             }
         }
@@ -67,6 +68,37 @@ namespace GameSystem
         {
             if (monsterCap <= monsterCount) { return; }
             int randSpawn = Random.Range(0, spawns.Count);
+            int rand = Random.Range(0, 5);
+
+            GameObject golem = golems[0];
+            if(level < 3)
+            {
+                golem = golems[0];
+            }
+            if(level == 3)
+            {
+                if (rand == 0)
+                    golem = golems[1];
+            }
+            if(level == 4)
+            {
+                if (rand == 0 || rand == 1)
+                    golem = golems[1];
+            }
+            if (level == 5)
+            {
+                if (rand == 1 || rand == 2 || rand == 3)
+                    golem = golems[1];
+                else if(rand == 0)
+                    golem = golems[2];
+            }
+            if (level > 5)
+            {
+                if (rand == 2 || rand == 3)
+                    golem = golems[1];
+                else if (rand == 0 || rand == 1)
+                    golem = golems[2];
+            }
 
             for (int i = 0; i < spawns.Count; i++)
             {

@@ -39,10 +39,6 @@ public class MainMenuManager : MonoBehaviour
                 EscapeOptionMenu();
             }
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PlayerPrefs.SetString("PlayerName", "");
-        }
     }
     public void ButtonNewGame()
     {

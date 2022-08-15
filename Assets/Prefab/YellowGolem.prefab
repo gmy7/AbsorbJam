@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultProjectile: {fileID: 7214894660094016422, guid: 76dca2701912c4549909ef70e86796be, type: 3}
-  lightning: {fileID: 0}
+  lightning: {fileID: 3694995306582813270, guid: 516e60eed378b564a956926393bcda00, type: 3}
   firePoint: {fileID: 3777016018384919334}
 --- !u!114 &2416115836843056458
 MonoBehaviour:
@@ -174,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behaviorState: 0
+  behaviourType: 1
 --- !u!114 &8569215217023193353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093d79a300700f54cb8a93a5fddf5270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.7
+  moveSpeed: 2
   teleportDistance: 5
 --- !u!114 &6095866928999638064
 MonoBehaviour:
@@ -204,7 +205,7 @@ MonoBehaviour:
   core: {fileID: 1110103006199929551, guid: 6e2921c8d3fa5b74cb0fca613c85c98c, type: 3}
   coreLight: {fileID: 4916649754114249987}
   swipeBox: {fileID: 1522731506245839177}
-  swingRangeFinder: {fileID: 0}
+  swingRangeFinder: {fileID: 5215647231483749433}
 --- !u!212 &7324431819916615969
 SpriteRenderer:
   m_ObjectHideFlags: 0

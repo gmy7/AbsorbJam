@@ -55,7 +55,10 @@ public class Enemy : MonoBehaviour
         transform.root.GetComponent<MonsterHandler>().monsterCount--;
         int rand = Random.Range(0, 5);
         if (rand == 0)
-            Instantiate(core, transform.position, transform.rotation);
+        {
+            GameObject droppedCore = Instantiate(core, transform.position, transform.rotation);
+            droppedCore.GetComponent<Core>().coreType = golem.behaviourType;
+        }
     }
     public void FinishDeath()
     {

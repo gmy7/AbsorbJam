@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  invincible: 1
   counterCooldown: 3
   counterTime: 1
   teleportCooldown: 1.5
@@ -203,6 +204,8 @@ MonoBehaviour:
   defaultProjectile: {fileID: 7214894660094016422, guid: 76dca2701912c4549909ef70e86796be, type: 3}
   lightning: {fileID: 3694995306582813270, guid: 516e60eed378b564a956926393bcda00, type: 3}
   firePoint: {fileID: 5569308389737308900}
+  projectileFire: {fileID: 0}
+  lightningFire: {fileID: 0}
 --- !u!95 &6244198868953602877
 Animator:
   serializedVersion: 4

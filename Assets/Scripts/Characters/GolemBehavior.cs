@@ -11,7 +11,9 @@ public class GolemBehavior : MonoBehaviour
     private float randomStartDelay;
     private float randomShootDelay;
     private bool movingOutOfSpawn;
+    private MonsterHandler monsterHandler;
     [SerializeField] private AudioClip spawnSound;
+
     private AudioSource src;
     public enum BehaviorState { Walking, Idle, Shooting, Dying, Spawning, Swiping }
     public BehaviorState behaviorState;
@@ -20,7 +22,8 @@ public class GolemBehavior : MonoBehaviour
     {
         mover = GetComponent<Mover>();
         shooter = GetComponent<ProjectileShooter>();
-        player = transform.root.GetComponent<MonsterHandler>().player;
+        monsterHandler = transform.root.GetComponent<MonsterHandler>();
+        player = monsterHandler.player;
         animator = GetComponent<Animator>();
         src = GetComponent<AudioSource>();
     }
@@ -56,11 +59,26 @@ public class GolemBehavior : MonoBehaviour
         Vector3 movementVector = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
 
         if (towards)
-            mover.Move(movementVector, true);
+            mover.Move(movementVector, true, true);
         else
         {
-            if (Vector3.Distance(player.transform.position, transform.position) < 3f)
-                mover.Move(-movementVector, true);
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            if (distance < 1.5f)
+            {
+                if (Mathf.Abs(transform.position.x) >= 6.6 || Mathf.Abs(transform.position.y) >= 3.3)
+                {
+                    return;
+                }
+                else
+                {
+                    mover.Move(-movementVector, true, true);
+                    return;
+                }
+            }
+            if (distance < 12f && distance > 9f)
+            {
+                mover.Move(movementVector, true, true);
+            }
         }
 
     }

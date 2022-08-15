@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private readonly CooldownGuard damageFlash = new();
     private GameManager gameManager;
     private bool rampingColor;
-    private bool invincible;
+    [SerializeField] private bool invincible;
     public float counterCooldown = 2;
     [SerializeField] private float counterTime;
     [SerializeField] private float teleportCooldown;

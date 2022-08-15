@@ -29,7 +29,6 @@ namespace GameSystem
         {
             SpawnMonster();
             StartCoroutine(StartDelay());
-
         }
         private IEnumerator StartDelay()
         {

@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         if(isMoving)
-            mover.Move(FireDirection, false);
+            mover.Move(FireDirection, false, true);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

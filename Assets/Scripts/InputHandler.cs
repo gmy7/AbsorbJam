@@ -63,7 +63,7 @@ namespace GameSystem
                     mover.Teleport(moveVector);
                 }
                 else
-                    mover.Move(moveVector, false);
+                    mover.Move(moveVector, false, false);
                 player.StopCountering();
                 return;
             }
